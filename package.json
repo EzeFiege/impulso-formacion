@@ -1,0 +1,11 @@
+{
+  "name": "proyecto-academia",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix academia_cursos",
+    "build": "npm run build --prefix academia_cursos",
+    "start": "npm run start --prefix academia_cursos",
+    "lint": "npm run lint --prefix academia_cursos",
+    "typecheck": "npm run typecheck --prefix academia_cursos"
+  }
+}
