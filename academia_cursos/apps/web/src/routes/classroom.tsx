@@ -59,7 +59,7 @@ import {
 } from 'lucide-react';
 
 export async function loader({ params }: Route.LoaderArgs) {
-	const handle = params.handle || 'desarrollo-web-fullstack';
+	const handle = params.handle || 'programacion-plc-siemens-tia-portal';
 	let course: ProductListItem;
 
 	try {

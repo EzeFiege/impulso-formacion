@@ -202,7 +202,7 @@ export function GlobalNavbar() {
 
 					{/* Botón Rápido Aula Virtual */}
 					<Link
-						to="/curso/desarrollo-web-fullstack/aprender"
+						to="/curso/programacion-plc-siemens-tia-portal/aprender"
 						className="hidden sm:inline-flex"
 						style={{
 							background: '#2563eb',
@@ -286,7 +286,7 @@ export function GlobalNavbar() {
 					})}
 					<div style={{ paddingTop: 10, borderTop: '1px solid #f1f5f9' }}>
 						<Link
-							to="/curso/desarrollo-web-fullstack/aprender"
+							to="/curso/programacion-plc-siemens-tia-portal/aprender"
 							style={{
 								display: 'flex',
 								alignItems: 'center',

@@ -12,128 +12,141 @@ export type CourseReview = {
 const REVIEWS_STORAGE_PREFIX = 'impulso_reviews_';
 
 export const INITIAL_REVIEWS: Record<string, CourseReview[]> = {
-	'desarrollo-web-fullstack': [
+	'programacion-plc-siemens-tia-portal': [
 		{
 			id: 'rev-1',
-			courseHandle: 'desarrollo-web-fullstack',
-			authorName: 'Martín Paredes',
+			courseHandle: 'programacion-plc-siemens-tia-portal',
+			authorName: 'Ing. Javier Morales',
 			avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80',
 			rating: 5,
 			date: 'Hace 3 días',
 			comment:
-				'Excelente curso. La explicación de React 19 y Node.js es súper clara y los proyectos finales me sirvieron para armar mi primer portafolio profesional. Conseguí mi primer empleo como dev junior.',
+				'La explicación de Bloques FB con memoria de instancia y la programación en Texto Estructurado (SCL) es impecable. Pudimos modernizar el control de una envasadora en planta en tiempo récord.',
 			verifiedBuyer: true,
 		},
 		{
 			id: 'rev-2',
-			courseHandle: 'desarrollo-web-fullstack',
-			authorName: 'Sofía Benítez',
+			courseHandle: 'programacion-plc-siemens-tia-portal',
+			authorName: 'Tec. Lucas Benítez',
 			avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80',
 			rating: 5,
 			date: 'Hace 1 semana',
 			comment:
-				'Los quizzes al final de cada módulo son clave para fijar los conceptos. El aula virtual funciona de diez y el soporte de los tutores responde rápido.',
+				'Los ejercicios prácticos con el simulador PLC-SIM y las pantallas HMI WinCC son excelentes. Me sirvió para conseguir empleo en una integradora de automatización industrial.',
 			verifiedBuyer: true,
 		},
 		{
 			id: 'rev-3',
-			courseHandle: 'desarrollo-web-fullstack',
+			courseHandle: 'programacion-plc-siemens-tia-portal',
 			authorName: 'Gonzalo Rossi',
 			avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=120&q=80',
-			rating: 4,
+			rating: 5,
 			date: 'Hace 2 semanas',
 			comment:
-				'Muy buen contenido práctico. Me gustó especialmente el módulo de autenticación con JWT y buenas prácticas en bases de datos.',
+				'Muy completo el módulo de comunicación Modbus TCP y diagnóstico de fallas con el buffer de la CPU. Excelente soporte de los tutores.',
 			verifiedBuyer: true,
 		},
 	],
-	'python-analisis-datos-ia': [
+	'electricidad-industrial-tableros': [
 		{
-			id: 'rev-py-1',
-			courseHandle: 'python-analisis-datos-ia',
-			authorName: 'Valentina Castro',
+			id: 'rev-elec-1',
+			courseHandle: 'electricidad-industrial-tableros',
+			authorName: 'Marcelo Peralta',
 			avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80',
 			rating: 5,
 			date: 'Hace 5 días',
 			comment:
-				'La profesora explica con muchísima claridad. Pasamos de no saber nada de NumPy a manipular DataFrames complejos en pocas semanas.',
+				'La lectura de planos bajo norma IEC y el cálculo de protecciones según curvas de disparo termomagnéticas y selectividad me vino de diez para armar tableros en el taller.',
 			verifiedBuyer: true,
 		},
 	],
-	'diseno-ux-ui-figma': [
+	'instrumentacion-control-procesos': [
 		{
-			id: 'rev-ux-1',
-			courseHandle: 'diseno-ux-ui-figma',
-			authorName: 'Nicolás Morales',
-			avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&q=80',
+			id: 'rev-inst-1',
+			courseHandle: 'instrumentacion-control-procesos',
+			authorName: 'Laura Domínguez',
+			avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
 			rating: 5,
 			date: 'Hace 4 días',
 			comment:
-				'El módulo de Auto Layout y sistemas de diseño en Figma vale cada centavo. Mis prototipos ahora se ven profesionales y limpios.',
+				'La sintonía de lazos PID y el conexionado del lazo 4-20mA con comunicador HART es súper clara y aplicable a situaciones reales de planta.',
 			verifiedBuyer: true,
 		},
 	],
-	'marketing-digital-estrategia': [
+	'scada-redes-industriales-ot': [
 		{
-			id: 'rev-mkt-1',
-			courseHandle: 'marketing-digital-estrategia',
-			authorName: 'Carla Villalba',
-			avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
+			id: 'rev-scada-1',
+			courseHandle: 'scada-redes-industriales-ot',
+			authorName: 'Diego Fernández',
+			avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80',
 			rating: 5,
 			date: 'Hace 6 días',
 			comment:
-				'Estrategias muy actuales de Meta Ads y Google Ads. Pude duplicar el retorno de inversión en las campañas de mi emprendimiento.',
+				'Excelente enfoque en la arquitectura Purdue y la ciberseguridad industrial bajo norma IEC 62443. Indispensable para conectar IT con OT de forma segura.',
 			verifiedBuyer: true,
 		},
 	],
 };
 
-export function getCourseReviews(courseHandle: string): CourseReview[] {
-	const initial = INITIAL_REVIEWS[courseHandle] || INITIAL_REVIEWS['desarrollo-web-fullstack'] || [];
-	if (typeof window === 'undefined') return initial;
+// Aliases para soportar consultas sobre cursos antiguos
+INITIAL_REVIEWS['desarrollo-web-fullstack'] = INITIAL_REVIEWS['programacion-plc-siemens-tia-portal'];
+INITIAL_REVIEWS['python-analisis-datos-ia'] = INITIAL_REVIEWS['electricidad-industrial-tableros'];
+INITIAL_REVIEWS['diseno-ux-ui-figma'] = INITIAL_REVIEWS['instrumentacion-control-procesos'];
+INITIAL_REVIEWS['marketing-digital-estrategia'] = INITIAL_REVIEWS['scada-redes-industriales-ot'];
 
+export function getCourseReviews(courseHandle: string): CourseReview[] {
 	try {
 		const raw = localStorage.getItem(`${REVIEWS_STORAGE_PREFIX}${courseHandle}`);
-		if (!raw) return initial;
-		const userAdded: CourseReview[] = JSON.parse(raw);
-		return [...userAdded, ...initial];
-	} catch {
-		return initial;
+		if (raw) {
+			const parsed = JSON.parse(raw);
+			if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+		}
+	} catch (e) {
+		console.warn('Error leyendo reseñas guardadas:', e);
 	}
+
+	const initial = INITIAL_REVIEWS[courseHandle] || INITIAL_REVIEWS['programacion-plc-siemens-tia-portal'] || [];
+	return initial;
 }
 
 export function addCourseReview(
 	courseHandle: string,
-	review: { authorName: string; rating: number; comment: string },
+	reviewData: Omit<CourseReview, 'id' | 'date' | 'verifiedBuyer' | 'courseHandle'>,
 ): CourseReview {
+	const current = getCourseReviews(courseHandle);
 	const newReview: CourseReview = {
-		id: 'rev_' + Date.now(),
+		id: `rev-${Date.now()}`,
 		courseHandle,
-		authorName: review.authorName.trim() || 'Estudiante',
-		rating: Math.min(5, Math.max(1, review.rating)),
+		authorName: reviewData.authorName,
+		rating: reviewData.rating,
+		comment: reviewData.comment,
+		avatar: reviewData.avatar,
 		date: 'Recién publicado',
-		comment: review.comment.trim(),
 		verifiedBuyer: true,
 	};
 
-	if (typeof window !== 'undefined') {
-		try {
-			const raw = localStorage.getItem(`${REVIEWS_STORAGE_PREFIX}${courseHandle}`);
-			const existing: CourseReview[] = raw ? JSON.parse(raw) : [];
-			localStorage.setItem(`${REVIEWS_STORAGE_PREFIX}${courseHandle}`, JSON.stringify([newReview, ...existing]));
-			window.dispatchEvent(new Event('impulso_reviews_updated'));
-		} catch (e) {
-			console.error('Error guardando reseña:', e);
-		}
+	const updated = [newReview, ...current];
+	try {
+		localStorage.setItem(`${REVIEWS_STORAGE_PREFIX}${courseHandle}`, JSON.stringify(updated));
+		window.dispatchEvent(new CustomEvent('impulso_reviews_change', { detail: { courseHandle } }));
+	} catch (e) {
+		console.warn('Error guardando reseña:', e);
 	}
 
 	return newReview;
 }
 
-export function getCourseRatingSummary(courseHandle: string): { average: number; count: number } {
-	const reviews = getCourseReviews(courseHandle);
-	if (reviews.length === 0) return { average: 5.0, count: 0 };
-	const total = reviews.reduce((acc, r) => acc + r.rating, 0);
-	const avg = Number((total / reviews.length).toFixed(1));
-	return { average: avg, count: reviews.length };
+export function getAverageRating(reviews: CourseReview[]): { average: number; total: number; count: number } {
+	if (!reviews || reviews.length === 0) return { average: 5.0, total: 0, count: 0 };
+	const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
+	return {
+		average: Number((sum / reviews.length).toFixed(1)),
+		total: reviews.length,
+		count: reviews.length,
+	};
+}
+
+export function getCourseRatingSummary(courseHandle: string): { average: number; total: number; count: number } {
+	const revs = getCourseReviews(courseHandle);
+	return getAverageRating(revs);
 }

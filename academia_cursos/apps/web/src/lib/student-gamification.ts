@@ -44,10 +44,11 @@ export function getGamificationStats(): GamificationStats {
 	try {
 		// 1. Calcular lecciones completadas a través de los cursos principales
 		const courseHandles = [
+			'programacion-plc-siemens-tia-portal',
+			'electricidad-industrial-tableros',
+			'instrumentacion-control-procesos',
+			'scada-redes-industriales-ot',
 			'desarrollo-web-fullstack',
-			'python-analisis-datos-ia',
-			'diseno-ux-ui-figma',
-			'marketing-digital-estrategia',
 		];
 
 		let totalCompletedLessons = 0;

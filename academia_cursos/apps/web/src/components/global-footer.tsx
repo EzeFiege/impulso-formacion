@@ -87,8 +87,8 @@ export function GlobalFooter() {
 									</Link>
 								</li>
 								<li>
-									<Link to="/curso/desarrollo-web-fullstack/aprender" style={{ color: '#94a3b8', textDecoration: 'none' }}>
-										Aula Virtual Demo
+									<Link to="/curso/programacion-plc-siemens-tia-portal/aprender" style={{ color: '#94a3b8', textDecoration: 'none' }}>
+										Aula Virtual Demo (PLC)
 									</Link>
 								</li>
 							</ul>

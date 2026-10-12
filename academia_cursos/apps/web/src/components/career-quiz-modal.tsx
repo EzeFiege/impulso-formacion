@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
 import {
 	Compass,
 	X,
 	ArrowRight,
 	CheckCircle2,
 	Sparkles,
-	Code2,
-	Database,
-	Palette,
-	TrendingUp,
+	Cpu,
+	Zap,
+	Gauge,
+	Network,
 	Tag,
 	ShoppingBag,
 	RotateCcw,
@@ -23,25 +22,21 @@ type CareerQuizModalProps = {
 
 export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 	const [step, setStep] = useState(1);
-	const [interest, setInterest] = useState<'web' | 'data' | 'ux' | 'marketing'>('web');
+	const [interest, setInterest] = useState<'plc' | 'electricidad' | 'instrumentacion' | 'scada'>('plc');
 	const [experience, setExperience] = useState<'cero' | 'basico' | 'avanzado'>('cero');
 	const [timeCommitment, setTimeCommitment] = useState<'3-5' | '6-10' | '10+'>('3-5');
 
 	if (!isOpen) return null;
 
-	// Determinar curso recomendado según intereses
+	// Determinar curso recomendado según perfil técnico OT
 	const recommendedCourse =
-		interest === 'web'
-			? FALLBACK_COURSES.find((c) => c.url_handle.includes('web') || c.id === 'desarrollo-web-fullstack') ||
-			  FALLBACK_COURSES[0]
-			: interest === 'data'
-			? FALLBACK_COURSES.find((c) => c.url_handle.includes('python') || c.id === 'python-analisis-datos') ||
-			  FALLBACK_COURSES[1]
-			: interest === 'ux'
-			? FALLBACK_COURSES.find((c) => c.url_handle.includes('ux') || c.id === 'diseno-ux-ui') ||
-			  FALLBACK_COURSES[2]
-			: FALLBACK_COURSES.find((c) => c.url_handle.includes('marketing') || c.id === 'marketing-digital') ||
-			  FALLBACK_COURSES[3];
+		interest === 'plc'
+			? FALLBACK_COURSES[0]
+			: interest === 'electricidad'
+			? FALLBACK_COURSES[1]
+			: interest === 'instrumentacion'
+			? FALLBACK_COURSES[2]
+			: FALLBACK_COURSES[3];
 
 	function handleAddToCart() {
 		try {
@@ -60,7 +55,7 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 
 	function handleReset() {
 		setStep(1);
-		setInterest('web');
+		setInterest('plc');
 		setExperience('cero');
 		setTimeCommitment('3-5');
 	}
@@ -86,10 +81,10 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 							</div>
 							<div>
 								<div className="text-[10px] font-extrabold text-blue-600 uppercase tracking-widest">
-									TEST DE ORIENTACIÓN VOCACIONAL · PASO {step} DE 3
+									TEST DE ORIENTACIÓN TÉCNICA · PASO {step} DE 3
 								</div>
 								<h3 className="text-lg md:text-xl font-extrabold text-[#102a43]">
-									Descubrí tu formación ideal en 1 minuto
+									Descubrí tu especialización industrial en 1 minuto
 								</h3>
 							</div>
 						</div>
@@ -101,108 +96,108 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 							/>
 						</div>
 
-						{/* Pregunta 1: Área de Interés */}
+						{/* Pregunta 1: Área de Interés OT */}
 						{step === 1 && (
 							<div className="space-y-4">
 								<h4 className="text-sm font-bold text-slate-700">
-									1. ¿Qué tipo de proyectos te entusiasmaría más construir?
+									1. ¿Qué área técnica te gustaría dominar o profundizar en planta?
 								</h4>
 
 								<div className="grid gap-2.5">
 									<label
-										onClick={() => setInterest('web')}
+										onClick={() => setInterest('plc')}
 										className={`p-4 rounded-xl border flex items-center gap-3 cursor-pointer transition-all ${
-											interest === 'web'
+											interest === 'plc'
 												? 'border-blue-600 bg-blue-50/60 shadow-xs'
 												: 'border-slate-200 hover:border-slate-300'
 										}`}
 									>
 										<div className="p-2 rounded-lg bg-blue-100 text-blue-700">
-											<Code2 size={20} />
+											<Cpu size={20} />
 										</div>
 										<div className="flex-1">
-											<div className="text-xs font-bold text-[#102a43]">Desarrollo Web & Aplicaciones</div>
-											<div className="text-[11px] text-slate-500">Crear sitios modernos con React, JavaScript y APIs.</div>
+											<div className="text-xs font-bold text-[#102a43]">Programación de PLC & Automatización</div>
+											<div className="text-[11px] text-slate-500">Lógica Ladder, Siemens S7-1200/1500, TIA Portal y pantallas HMI.</div>
 										</div>
-										<input type="radio" checked={interest === 'web'} readOnly className="text-blue-600" />
+										<input type="radio" checked={interest === 'plc'} readOnly className="text-blue-600" />
 									</label>
 
 									<label
-										onClick={() => setInterest('data')}
+										onClick={() => setInterest('electricidad')}
 										className={`p-4 rounded-xl border flex items-center gap-3 cursor-pointer transition-all ${
-											interest === 'data'
-												? 'border-blue-600 bg-blue-50/60 shadow-xs'
-												: 'border-slate-200 hover:border-slate-300'
-										}`}
-									>
-										<div className="p-2 rounded-lg bg-emerald-100 text-emerald-700">
-											<Database size={20} />
-										</div>
-										<div className="flex-1">
-											<div className="text-xs font-bold text-[#102a43]">Ciencia de Datos & Inteligencia Artificial</div>
-											<div className="text-[11px] text-slate-500">Analizar patrones con Python, machine learning y métricas.</div>
-										</div>
-										<input type="radio" checked={interest === 'data'} readOnly className="text-blue-600" />
-									</label>
-
-									<label
-										onClick={() => setInterest('ux')}
-										className={`p-4 rounded-xl border flex items-center gap-3 cursor-pointer transition-all ${
-											interest === 'ux'
-												? 'border-blue-600 bg-blue-50/60 shadow-xs'
-												: 'border-slate-200 hover:border-slate-300'
-										}`}
-									>
-										<div className="p-2 rounded-lg bg-purple-100 text-purple-700">
-											<Palette size={20} />
-										</div>
-										<div className="flex-1">
-											<div className="text-xs font-bold text-[#102a43]">Diseño UX/UI & Prototipos en Figma</div>
-											<div className="text-[11px] text-slate-500">Diseñar interfaces atractivas, funcionales y accesibles.</div>
-										</div>
-										<input type="radio" checked={interest === 'ux'} readOnly className="text-blue-600" />
-									</label>
-
-									<label
-										onClick={() => setInterest('marketing')}
-										className={`p-4 rounded-xl border flex items-center gap-3 cursor-pointer transition-all ${
-											interest === 'marketing'
+											interest === 'electricidad'
 												? 'border-blue-600 bg-blue-50/60 shadow-xs'
 												: 'border-slate-200 hover:border-slate-300'
 										}`}
 									>
 										<div className="p-2 rounded-lg bg-amber-100 text-amber-700">
-											<TrendingUp size={20} />
+											<Zap size={20} />
 										</div>
 										<div className="flex-1">
-											<div className="text-xs font-bold text-[#102a43]">Marketing Digital & Crecimiento</div>
-											<div className="text-[11px] text-slate-500">Escalar negocios, anuncios y estrategias en redes.</div>
+											<div className="text-xs font-bold text-[#102a43]">Electricidad Industrial & Tableros de Control</div>
+											<div className="text-[11px] text-slate-500">Planos bajo norma IEC, protecciones termomagnéticas, contactores y variadores VFD.</div>
 										</div>
-										<input type="radio" checked={interest === 'marketing'} readOnly className="text-blue-600" />
+										<input type="radio" checked={interest === 'electricidad'} readOnly className="text-blue-600" />
+									</label>
+
+									<label
+										onClick={() => setInterest('instrumentacion')}
+										className={`p-4 rounded-xl border flex items-center gap-3 cursor-pointer transition-all ${
+											interest === 'instrumentacion'
+												? 'border-blue-600 bg-blue-50/60 shadow-xs'
+												: 'border-slate-200 hover:border-slate-300'
+										}`}
+									>
+										<div className="p-2 rounded-lg bg-emerald-100 text-emerald-700">
+											<Gauge size={20} />
+										</div>
+										<div className="flex-1">
+											<div className="text-xs font-bold text-[#102a43]">Instrumentación Industrial & Lazos PID</div>
+											<div className="text-[11px] text-slate-500">Transmisores 4-20mA, termocuplas PT100, válvulas de control y sintonía en lazo cerrado.</div>
+										</div>
+										<input type="radio" checked={interest === 'instrumentacion'} readOnly className="text-blue-600" />
+									</label>
+
+									<label
+										onClick={() => setInterest('scada')}
+										className={`p-4 rounded-xl border flex items-center gap-3 cursor-pointer transition-all ${
+											interest === 'scada'
+												? 'border-blue-600 bg-blue-50/60 shadow-xs'
+												: 'border-slate-200 hover:border-slate-300'
+										}`}
+									>
+										<div className="p-2 rounded-lg bg-purple-100 text-purple-700">
+											<Network size={20} />
+										</div>
+										<div className="flex-1">
+											<div className="text-xs font-bold text-[#102a43]">Sistemas SCADA, Redes Industriales & OT</div>
+											<div className="text-[11px] text-slate-500">Ignition, redes Profinet/Modbus, servidores OPC UA y ciberseguridad IEC 62443.</div>
+										</div>
+										<input type="radio" checked={interest === 'scada'} readOnly className="text-blue-600" />
 									</label>
 								</div>
 							</div>
 						)}
 
-						{/* Pregunta 2: Experiencia Previa */}
+						{/* Pregunta 2: Nivel previo */}
 						{step === 2 && (
 							<div className="space-y-4">
 								<h4 className="text-sm font-bold text-slate-700">
-									2. ¿Cuál es tu punto de partida en esta disciplina?
+									2. ¿Cuál es tu experiencia técnica actual?
 								</h4>
 
-								<div className="grid gap-3">
+								<div className="grid gap-2.5">
 									<label
 										onClick={() => setExperience('cero')}
 										className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
 											experience === 'cero'
-												? 'border-blue-600 bg-blue-50/60'
+												? 'border-blue-600 bg-blue-50/60 shadow-xs'
 												: 'border-slate-200 hover:border-slate-300'
 										}`}
 									>
 										<div>
-											<div className="text-xs font-bold text-[#102a43]">Desde cero absoluto</div>
-											<div className="text-[11px] text-slate-500">No tengo conocimientos previos y quiero una base sólida paso a paso.</div>
+											<div className="text-xs font-bold text-[#102a43]">Principiante o estudiante técnico</div>
+											<div className="text-[11px] text-slate-500">Quiero aprender desde los fundamentos teóricos y prácticos.</div>
 										</div>
 										<input type="radio" checked={experience === 'cero'} readOnly className="text-blue-600" />
 									</label>
@@ -211,13 +206,13 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 										onClick={() => setExperience('basico')}
 										className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
 											experience === 'basico'
-												? 'border-blue-600 bg-blue-50/60'
+												? 'border-blue-600 bg-blue-50/60 shadow-xs'
 												: 'border-slate-200 hover:border-slate-300'
 										}`}
 									>
 										<div>
-											<div className="text-xs font-bold text-[#102a43]">Nociones intermedias</div>
-											<div className="text-[11px] text-slate-500">He visto tutoriales o cursos iniciales y busco proyectos reales.</div>
+											<div className="text-xs font-bold text-[#102a43]">Técnico de mantenimiento / Electricista</div>
+											<div className="text-[11px] text-slate-500">Trabajo en planta o taller y quiero dar el salto a la automatización.</div>
 										</div>
 										<input type="radio" checked={experience === 'basico'} readOnly className="text-blue-600" />
 									</label>
@@ -226,13 +221,13 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 										onClick={() => setExperience('avanzado')}
 										className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
 											experience === 'avanzado'
-												? 'border-blue-600 bg-blue-50/60'
+												? 'border-blue-600 bg-blue-50/60 shadow-xs'
 												: 'border-slate-200 hover:border-slate-300'
 										}`}
 									>
 										<div>
-											<div className="text-xs font-bold text-[#102a43]">Profesional en búsqueda de especialización</div>
-											<div className="text-[11px] text-slate-500">Quiero incorporar herramientas actuales para sumar al CV.</div>
+											<div className="text-xs font-bold text-[#102a43]">Profesional / Ingeniero de planta</div>
+											<div className="text-[11px] text-slate-500">Busco certificar mis conocimientos y dominar arquitecturas complejas.</div>
 										</div>
 										<input type="radio" checked={experience === 'avanzado'} readOnly className="text-blue-600" />
 									</label>
@@ -240,25 +235,25 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 							</div>
 						)}
 
-						{/* Pregunta 3: Dedicación Semanal */}
+						{/* Pregunta 3: Disponibilidad semanal */}
 						{step === 3 && (
 							<div className="space-y-4">
 								<h4 className="text-sm font-bold text-slate-700">
-									3. ¿Cuánto tiempo estimás dedicarle semanalmente?
+									3. ¿Cuánto tiempo podés dedicarle al estudio por semana?
 								</h4>
 
-								<div className="grid gap-3">
+								<div className="grid gap-2.5">
 									<label
 										onClick={() => setTimeCommitment('3-5')}
 										className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
 											timeCommitment === '3-5'
-												? 'border-blue-600 bg-blue-50/60'
+												? 'border-blue-600 bg-blue-50/60 shadow-xs'
 												: 'border-slate-200 hover:border-slate-300'
 										}`}
 									>
 										<div>
 											<div className="text-xs font-bold text-[#102a43]">3 a 5 horas semanales</div>
-											<div className="text-[11px] text-slate-500">A mi propio ritmo, combinando con trabajo o estudios.</div>
+											<div className="text-[11px] text-slate-500">Ritmo flexible para compatibilizar con jornadas de trabajo.</div>
 										</div>
 										<input type="radio" checked={timeCommitment === '3-5'} readOnly className="text-blue-600" />
 									</label>
@@ -267,28 +262,28 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 										onClick={() => setTimeCommitment('6-10')}
 										className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
 											timeCommitment === '6-10'
-												? 'border-blue-600 bg-blue-50/60'
+												? 'border-blue-600 bg-blue-50/60 shadow-xs'
 												: 'border-slate-200 hover:border-slate-300'
 										}`}
 									>
 										<div>
 											<div className="text-xs font-bold text-[#102a43]">6 a 10 horas semanales</div>
-											<div className="text-[11px] text-slate-500">Ritmo acelerado con prácticas continuas.</div>
+											<div className="text-[11px] text-slate-500">Avance constante y prácticas con simuladores en paralelo.</div>
 										</div>
 										<input type="radio" checked={timeCommitment === '6-10'} readOnly className="text-blue-600" />
 									</label>
 
 									<label
-										onClick={() => setTimeCommitment('10+')}
+										onClick={() => timeCommitment === '10+' ? null : setTimeCommitment('10+')}
 										className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
 											timeCommitment === '10+'
-												? 'border-blue-600 bg-blue-50/60'
+												? 'border-blue-600 bg-blue-50/60 shadow-xs'
 												: 'border-slate-200 hover:border-slate-300'
 										}`}
 									>
 										<div>
 											<div className="text-xs font-bold text-[#102a43]">Más de 10 horas semanales</div>
-											<div className="text-[11px] text-slate-500">Inmersión intensiva para inserción laboral inmediata.</div>
+											<div className="text-[11px] text-slate-500">Modo inmersivo para certificar en tiempo récord.</div>
 										</div>
 										<input type="radio" checked={timeCommitment === '10+'} readOnly className="text-blue-600" />
 									</label>
@@ -296,12 +291,12 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 							</div>
 						)}
 
-						{/* Botones de navegación */}
-						<div className="flex justify-between items-center mt-8 pt-4 border-t border-slate-100">
+						{/* Botones de Navegación del Test */}
+						<div className="flex items-center justify-between mt-8 pt-4 border-t border-slate-100">
 							{step > 1 ? (
 								<button
 									onClick={() => setStep(step - 1)}
-									className="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800"
+									className="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors"
 								>
 									Atrás
 								</button>
@@ -311,9 +306,9 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 
 							<button
 								onClick={() => setStep(step + 1)}
-								className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-blue-600/20"
+								className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-extrabold shadow-md shadow-blue-600/30 transition-all"
 							>
-								{step === 3 ? 'Ver Mi Recomendación' : 'Siguiente'} <ArrowRight size={14} />
+								{step === 3 ? 'Ver Mi Recomendación Técnica' : 'Siguiente'} <ArrowRight size={15} />
 							</button>
 						</div>
 					</div>
@@ -326,7 +321,7 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 
 						<div>
 							<div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-blue-50 text-blue-700 border border-blue-200 uppercase tracking-wider mb-2">
-								<Sparkles size={13} /> Coincidencia del 98% con tu perfil
+								<Sparkles size={13} /> Coincidencia del 98% con tu perfil técnico
 							</div>
 							<h3 className="text-xl md:text-2xl font-black text-[#102a43]">
 								¡Tu formación ideal es:
@@ -336,12 +331,12 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 						{/* Tarjeta del curso recomendado */}
 						<div className="bg-slate-50 rounded-2xl p-5 border border-slate-200 text-left space-y-3">
 							<span className="text-[10px] uppercase font-bold text-blue-600 tracking-wider">
-								{recommendedCourse.ribbon_text || 'Especialización Profesional'}
+								{recommendedCourse.ribbon_text || 'Especialización Industrial'}
 							</span>
 							<h4 className="text-base font-extrabold text-[#102a43] m-0">{recommendedCourse.title}</h4>
 							<p className="text-xs text-slate-600 m-0">
 								{recommendedCourse.subtitle ||
-									'Aprende con proyectos reales, tutoría personalizada y certificación oficial.'}
+									'Aprende con simulaciones de planta, proyectos prácticos y certificación oficial.'}
 							</p>
 
 							<div className="flex items-center justify-between pt-2 border-t border-slate-200">
@@ -358,19 +353,19 @@ export function CareerQuizModal({ isOpen, onClose }: CareerQuizModalProps) {
 							</div>
 						</div>
 
-						<div className="flex flex-col sm:flex-row gap-3 pt-2">
+						<div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
 							<button
-								onClick={handleReset}
-								className="inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+								onClick={handleAddToCart}
+								className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-blue-600/30 transition-all cursor-pointer"
 							>
-								<RotateCcw size={14} /> Repetir Test
+								<ShoppingBag size={16} /> Inscribirme con 50% de Descuento
 							</button>
 
 							<button
-								onClick={handleAddToCart}
-								className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition-all shadow-lg shadow-blue-600/25 cursor-pointer"
+								onClick={handleReset}
+								className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-3 text-slate-500 hover:text-slate-800 text-xs font-bold transition-colors"
 							>
-								<ShoppingBag size={15} /> Aplicar Descuento y Ver en Carrito
+								<RotateCcw size={14} /> Repetir Test
 							</button>
 						</div>
 					</div>

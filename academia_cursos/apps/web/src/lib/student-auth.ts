@@ -14,7 +14,7 @@ export const DEFAULT_STUDENT: Student = {
 	name: 'Alex González',
 	email: 'alex.gonzalez@impulso.edu',
 	avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
-	enrolledCourses: ['desarrollo-web-fullstack'],
+	enrolledCourses: ['programacion-plc-siemens-tia-portal', 'electricidad-industrial-tableros'],
 	joinedDate: '2026-01-15',
 };
 

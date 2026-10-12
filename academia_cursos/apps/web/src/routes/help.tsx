@@ -103,7 +103,7 @@ export default function HelpPage() {
 	// Formulario de contacto
 	const [ticketName, setTicketName] = useState('');
 	const [ticketEmail, setTicketEmail] = useState('');
-	const [ticketCourse, setTicketCourse] = useState('desarrollo-web-fullstack');
+	const [ticketCourse, setTicketCourse] = useState('programacion-plc-siemens-tia-portal');
 	const [ticketMessage, setTicketMessage] = useState('');
 	const [ticketSuccess, setTicketSuccess] = useState<string | null>(null);
 
@@ -344,10 +344,10 @@ export default function HelpPage() {
 									onChange={(e) => setTicketCourse(e.target.value)}
 									className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm outline-none focus:border-blue-500 bg-white"
 								>
-									<option value="desarrollo-web-fullstack">Desarrollo Web Fullstack Moderno</option>
-									<option value="python-analisis-datos-ia">Python para Análisis de Datos & IA</option>
-									<option value="diseno-ux-ui-figma">Diseño UX/UI con Figma & Design Systems</option>
-									<option value="marketing-digital-estrategia">Marketing Digital & Performance Ads</option>
+									<option value="programacion-plc-siemens-tia-portal">Programación de PLC Siemens S7 & TIA Portal</option>
+									<option value="electricidad-industrial-tableros">Electricidad Industrial, Tableros & Protecciones</option>
+									<option value="instrumentacion-control-procesos">Instrumentación Industrial & Lazos de Control PID</option>
+									<option value="scada-redes-industriales-ot">Sistemas SCADA, Redes Industriales & Ciberseguridad OT</option>
 									<option value="general">Consulta General / Plataforma</option>
 								</select>
 							</div>

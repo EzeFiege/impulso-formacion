@@ -21,6 +21,10 @@ import {
 	MessageSquare,
 	X,
 	Compass,
+	Cpu,
+	Zap,
+	Gauge,
+	Network,
 } from 'lucide-react';
 import { type ProductListItem } from '@/api/ecommerce-api';
 import { getCourseCurriculum, getAllLessons } from '@/lib/course-curricula';
@@ -137,10 +141,14 @@ export function Store({ products, detail = false }: { products: ProductListItem[
 				p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
 				p.description.toLowerCase().includes(searchQuery.toLowerCase());
 			if (selectedCategory === 'todos') return matchesSearch;
-			if (selectedCategory === 'programacion')
-				return matchesSearch && (p.url_handle.includes('web') || p.url_handle.includes('python'));
-			if (selectedCategory === 'diseno') return matchesSearch && p.url_handle.includes('figma');
-			if (selectedCategory === 'marketing') return matchesSearch && p.url_handle.includes('marketing');
+			if (selectedCategory === 'plc')
+				return matchesSearch && (p.url_handle.includes('plc') || p.url_handle.includes('siemens'));
+			if (selectedCategory === 'electricidad')
+				return matchesSearch && (p.url_handle.includes('electricidad') || p.url_handle.includes('tableros'));
+			if (selectedCategory === 'instrumentacion')
+				return matchesSearch && (p.url_handle.includes('instrumentacion') || p.url_handle.includes('procesos'));
+			if (selectedCategory === 'scada')
+				return matchesSearch && (p.url_handle.includes('scada') || p.url_handle.includes('redes') || p.url_handle.includes('ot'));
 			return matchesSearch;
 		});
 	}, [products, searchQuery, selectedCategory]);
@@ -860,10 +868,11 @@ export function Store({ products, detail = false }: { products: ProductListItem[
 						>
 							<div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
 								{[
-									{ id: 'todos', label: 'Todos los cursos' },
-									{ id: 'programacion', label: 'Desarrollo & Datos' },
-									{ id: 'diseno', label: 'Diseño UX/UI' },
-									{ id: 'marketing', label: 'Marketing Digital' },
+									{ id: 'todos', label: 'Todos los programas' },
+									{ id: 'plc', label: 'PLC & Automatización' },
+									{ id: 'electricidad', label: 'Electricidad & Tableros' },
+									{ id: 'instrumentacion', label: 'Instrumentación & PID' },
+									{ id: 'scada', label: 'SCADA & Redes OT' },
 								].map((cat) => (
 									<button
 										key={cat.id}
@@ -887,7 +896,7 @@ export function Store({ products, detail = false }: { products: ProductListItem[
 
 							<input
 								type="text"
-								placeholder="Buscar curso por tema..."
+								placeholder="Buscar por PLC, TIA Portal, IEC, sensores..."
 								value={searchQuery}
 								onChange={(e) => setSearchQuery(e.target.value)}
 								style={{
@@ -911,8 +920,8 @@ export function Store({ products, detail = false }: { products: ProductListItem[
 								return (
 									<article key={p.id}>
 										<div className={'cover cover-' + (i % 4)}>
-											<Code2 size={48} />
-											<span>IMPULSO / FORMACIÓN DIGITAL</span>
+											{i % 4 === 0 ? <Cpu size={48} /> : i % 4 === 1 ? <Zap size={48} /> : i % 4 === 2 ? <Gauge size={48} /> : <Network size={48} />}
+											<span>IMPULSO / FORMACIÓN TÉCNICA OT</span>
 										</div>
 										<div className="card-body">
 											<div
@@ -1010,24 +1019,22 @@ export function Store({ products, detail = false }: { products: ProductListItem[
 					<>
 						<section className="hero">
 							<div className="eyebrow">
-								<span /> FORMACIÓN PARA TU PRÓXIMO PASO
+								<span /> FORMACIÓN INDUSTRIAL & AUTOMATIZACIÓN OT
 							</div>
 							<h1>
-								Tu futuro empieza
+								Llevá tu perfil técnico
 								<br />
-								con lo que <em>aprendés hoy.</em>
+								al estándar de la <em>Industria 4.0.</em>
 							</h1>
 							<p>
-								Aprendé nuevas habilidades. Desarrollá tu potencial.
-								<br />
-								Formación técnica y profesional, a tu ritmo y desde donde estés con nuestra Aula Virtual interactiva.
+								Especializate en programación de PLC Siemens y Rockwell, diseño de tableros eléctricos bajo norma IEC, lazos de control PID y sistemas SCADA con simuladores reales y certificación oficial.
 							</p>
 							<div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}>
 								<Link className="primary" to="/cursos">
 									Explorar catálogo de cursos <ArrowRight size={18} />
 								</Link>
 								<Link
-									to="/curso/desarrollo-web-fullstack/aprender"
+									to="/curso/programacion-plc-siemens-tia-portal/aprender"
 									className="secondary"
 									style={{
 										background: 'rgba(255,255,255,0.12)',
@@ -1042,7 +1049,7 @@ export function Store({ products, detail = false }: { products: ProductListItem[
 										margin: 0,
 									}}
 								>
-									<Play size={16} fill="white" /> Probar Aula Virtual Demo
+									<Play size={16} fill="white" /> Probar Aula Virtual Demo (PLC)
 								</Link>
 								<button
 									type="button"
@@ -1062,7 +1069,7 @@ export function Store({ products, detail = false }: { products: ProductListItem[
 										fontSize: 13,
 									}}
 								>
-									<Compass size={18} /> Test de Orientación (1 min)
+									<Compass size={18} /> Test de Orientación Técnica (1 min)
 								</button>
 							</div>
 
@@ -1071,15 +1078,15 @@ export function Store({ products, detail = false }: { products: ProductListItem[
 									<BookOpen size={18} /> Aula virtual 100% interactiva
 								</span>
 								<span>
-									<Award size={18} /> Certificados oficiales de logro
+									<Award size={18} /> Certificados oficiales con honores
 								</span>
 								<span>
 									<ShieldCheck size={18} /> Inscripción segura
 								</span>
 							</div>
 							<div className="graphic">
-								<Code2 size={75} />
-								<span>APRENDÉ. APLICÁ. AVANZÁ.</span>
+								<Cpu size={75} />
+								<span>AUTOMATIZÁ. CONTROLÁ. OPERÁ.</span>
 								<div className="graphic-line" />
 							</div>
 						</section>
@@ -1116,8 +1123,8 @@ export function Store({ products, detail = false }: { products: ProductListItem[
 									return (
 										<article key={p.id}>
 											<div className={'cover cover-' + (i % 4)}>
-												<Code2 size={48} />
-												<span>IMPULSO / FORMACIÓN DIGITAL</span>
+												{i % 4 === 0 ? <Cpu size={48} /> : i % 4 === 1 ? <Zap size={48} /> : i % 4 === 2 ? <Gauge size={48} /> : <Network size={48} />}
+												<span>IMPULSO / FORMACIÓN TÉCNICA OT</span>
 											</div>
 											<div className="card-body">
 												<div
